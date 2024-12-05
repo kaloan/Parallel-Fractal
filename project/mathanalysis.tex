@@ -1,0 +1,53 @@
+\section{Математически анализ на проблема}
+\begin{Large}
+
+Първо ще направим кратък анализ на широко известното множество на Манделброт, тъй като доста от идеите, свързани с компютърното изобразяване на фрактали, са следствие от опити за неговото представяне. Множеството на Манделброт (ще го бележим с \textfrak{M}) се състои от точките $c\in\mathbb{C}$ равнината, изпълняващи условията \ref{eq:1} и \ref{eq:2}, при условия $z_{0}=0$ и $f(z)=z^2+c$.
+\newline
+\vspace{0.1cm}
+\par
+\noindent
+Твърдение: $\exists{n} (\left\Vert z_n \right\Vert > 2) \implies c\not\in \textfrak{M} $
+\newline
+Доказателство:
+
+\begin{enumerate}
+
+\item
+Да допуснем, че $\left\Vert c \right\Vert > 2$. Ще покажем с индукция, че:\\
+ $\forall{n_{>0}} \left\Vert z_n \right\Vert \geq 2^{n-1} \left\Vert c \right\Vert$:
+\begin{itemize}
+
+\item База: $z_1=f(z_0)=z_0^2+c=0^2+c=0+c=c$, т.е. $\left\Vert z_1 \right\Vert = \left\Vert c \right\Vert$
+
+
+\item Нека е вярно за произволно n. Но тогава $z_{n+1}=z_n^2+c=z_n^2-(-c)$ и съответно:\\ $\left\Vert z_{n+1} \right\Vert \geq \left\Vert z_n^2 \right\Vert -  \left\Vert -c \right\Vert = {\left\Vert z_n \right\Vert}^2 -  \left\Vert c \right\Vert \geq (2^{n}\left\Vert c \right\Vert)^2 - \left\Vert c \right\Vert = 2^{2n} {\left\Vert c \right\Vert}^2 - \frac{{\left\Vert c \right\Vert}^2}{\left\Vert c \right\Vert} = (2^{2n}-\frac{1}{\left\Vert c \right\Vert}){\left\Vert c \right\Vert}^2 \geq (2^{2n}-\frac{1}{2}){\left\Vert c \right\Vert}^2 \geq 2^{2n-1}{\left\Vert c \right\Vert}^2 > 2^{2n} \left\Vert c \right\Vert \geq 2^n\left\Vert c \right\Vert $
+
+\end{itemize}
+Така $\left\Vert c \right\Vert > 2 \implies \lim_{n\to\infty}\left\Vert z_n \right\Vert$ и $c\not\in \textfrak{M}$. 
+%Но тогава редицата от нормите на елементите на орбитата е разходяща и $c\not\in \textfrak{M}$.
+
+
+\item
+Да допуснем, че $\left\Vert c \right\Vert \leq 2$ и $\exists{n}\exists{a_{>0}}\left\Vert z_n \right\Vert=2+a$. Тогава ще покажем с индукция, че $\forall{k} \left\Vert z_{n+k} \right\Vert \geq 2+(k+1)a$ :
+\begin{itemize}
+
+\item База: $\left\Vert z_{n+0} \right\Vert = 2+(0+1)a$
+
+\item Да допуснем, че е вярно за някое k. Тогава:
+$\left\Vert z_{n+k+1} \right\Vert \geq \left\Vert z_{n+k}^2 \right\Vert -  \left\Vert -c \right\Vert \geq \left\Vert z_{n+k}^2 \right\Vert - 2 = {\left\Vert z_{n+k} \right\Vert}^2 - 2 = (2+(k+1)a)^2 - 2 = (k+1)^2 a^2+4(k+1)a+2>2+(k+2)a$
+
+\end{itemize}
+Редицата от норми отново е разходяща и съоветно $c\not\in \textfrak{M}$.
+
+\end{enumerate}
+Това твърдение се използва при определянето дали точка е от множеството на Манделброт или не, както ще покажем по-късно.
+
+\par
+За нашата задача обаче не е толкова лесно да се изведе такова твърдение. Да забележим, че:
+$\lVert z_{n+1}\rVert = \left\Vert e^{z_n^2+c} \right\Vert = e^{Re(z_n^2+c)} = e^{Re(z_n^2)+Re(c)}= e^{Re(z_n)^2-Im(z_n)^2+Re(c)}$, тоест зависи и много от самото разположение на $z_n$ и $c$. Нещо повече, в общия случай, ротацията на $z_n$ влияе тази на $z_{n+1}$ по следния начин: $z_{n+1}=\lVert z_{n+1}\rVert(cos(Im(z_n^2+c))+ i sin(Im(z_n^2+c))=\lVert z_{n+1}\rVert (cos(2 Re(z_n) Im(z_n) + c) + i sin(2 Re(z_n) Im(z_n) + c))$ и прилагайки отново, виждаме доста сложна зависимост на $z_{n+2}$ от $z_n$ и $c$. Едва ли може да се каже нещо в общия случай.
+\par
+Може да забележим обаче, че ако $c\in\mathbb{R}$, то $z_1\in\mathbb{R}$, а оттам и $\forall{n}(z_n\in\mathbb{R})$.В такъв случай, ако $c \geq 0$ веднага получаваме, че $lim_{n\to\infty}z_n=\infty$. Ако пък $c<0$, то $z_1=e^c$,$z_2=e^{e^{2c}+c}$ и т.н. Но $z_1  \xrightarrow[c\to\infty]{} 0$, $z_2\xrightarrow[c\to\infty]{} 0$ и т.н. Тоест при достатъчно малки стойности на $c$, то ще е от нашето фрактално множество. При отрицателни стойности близо до $0$ се вижда, че $c$ не е в множеството ни. Точката, оказваща се повратна е решението на $e^{2c}+c=0$.
+\par
+Тъй като не можахме да намерим достатъчно условие за това дали точка е от търсеното множеството или не в общия случай, ще обсъдим евристични методи за приближеното му намиране по-долу.
+
+\end{Large}
